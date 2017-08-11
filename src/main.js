@@ -9,6 +9,6 @@ const signal = new Signal({})
 signal.observe(state => {
   render(
     <Title text='yo dudes' />,
-    document.querySelector('.js-main')
+    document.querySelector('.js-todo')
   )
 }, err => console.error(err))
