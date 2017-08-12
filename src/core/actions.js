@@ -1,6 +1,9 @@
 
 const actions = {
-  addTodo: 'app:addTodo'
+  addTodo: 'app:addTodo',
+  removeTodo: 'app:removeTodo',
+  toggleTodo: 'app:toggleTodo',
+  editTodo: 'app:editTodo'
 }
 
 export default actions

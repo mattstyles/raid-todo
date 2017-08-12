@@ -67,6 +67,7 @@
     "styled-jsx": "^1.0.10"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "raid": "^2.7.0",
     "raid-addons": "^2.8.0",
