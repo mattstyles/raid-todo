@@ -3,7 +3,8 @@ import {Signal} from 'raid'
 import {adaptor} from 'raid-addons'
 
 export const signal = new Signal({
-  newTodo: ''
+  newTodo: '',
+  todos: []
 })
 
 export const connect = adaptor(signal)

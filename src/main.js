@@ -2,21 +2,14 @@
 import {render} from 'react-dom'
 
 import {signal} from 'signals'
-import {debug} from 'core/updates'
 import App from 'views/app'
 
-import {update} from 'components/newTodo'
+import {update as newTodoUpdate} from 'components/newTodo'
+import {debug, todos} from 'core/updates'
 
 signal.register(debug)
-signal.register(update)
-// signal.register((state, {type, payload: {value}}) => {
-//   if (type === actions.onNewTodoChange) {
-//     state.newTodo = value
-//     return state
-//   }
-//
-//   return state
-// })
+signal.register(newTodoUpdate)
+signal.register(todos)
 
 signal.observe(state => {
   render(

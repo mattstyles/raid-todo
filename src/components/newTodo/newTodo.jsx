@@ -1,9 +1,9 @@
 
 import {compose} from 'lodash/fp'
-import vkey from 'vkey'
 
 import {connect, dispatch} from 'signals'
 import {noop} from 'utils'
+import {getInputValue, getKey} from 'core/selectors'
 import actions from './actions'
 import appActions from 'core/actions'
 
@@ -13,13 +13,11 @@ const dispatchEnterKey = ({key}) => key === '<enter>'
   ? dispatchEnterdown({key})
   : noop
 
-const getValue = ({target: {value}}) => ({value})
 const onChange = compose(
   dispatchChange,
-  getValue
+  getInputValue
 )
 
-const getKey = ({keyCode}) => ({key: vkey[keyCode]})
 const onEnterDown = compose(
   dispatchEnterKey,
   getKey
@@ -38,7 +36,7 @@ const NewTodo = ({newTodo}) => (
 )
 
 export default connect(
-  // ({newTodo}) => ({newTodo}),
-  state => ({newTodo: state.newTodo}),
+  ({newTodo}) => ({newTodo}),
+  // state => ({newTodo: state.newTodo}),
   NewTodo
 )
