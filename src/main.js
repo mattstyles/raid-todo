@@ -1,14 +1,26 @@
 
 import {render} from 'react-dom'
-import {Signal} from 'raid'
 
-import Title from './component'
+import {signal} from 'signals'
+import {debug} from 'core/updates'
+import App from 'views/app'
 
-const signal = new Signal({})
+import {update} from 'components/newTodo'
+
+signal.register(debug)
+signal.register(update)
+// signal.register((state, {type, payload: {value}}) => {
+//   if (type === actions.onNewTodoChange) {
+//     state.newTodo = value
+//     return state
+//   }
+//
+//   return state
+// })
 
 signal.observe(state => {
   render(
-    <Title text='yo dudes' />,
+    <App state={state} />,
     document.querySelector('.js-todo')
   )
 }, err => console.error(err))
