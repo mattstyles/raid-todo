@@ -75,6 +75,7 @@
     "raid-streams": "^2.8.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "reselect": "^2.5.4",
     "todomvc-app-css": "^2.1.0",
     "todomvc-common": "^1.0.3",
     "uuid": "^3.1.0",

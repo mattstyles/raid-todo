@@ -1,9 +1,14 @@
 
-import {connect} from 'signals'
+import {connect, dispatch} from 'signals'
+import {createSelector} from 'reselect'
 
 import Todo from './todo'
+import {getActiveCount} from 'core/todos'
+import appActions from 'core/actions'
 
-const Todos = ({todos}) => {
+const dispatchToggleAll = dispatch(appActions.toggleAll)
+
+const Todos = ({todos, allTodosCompleted}) => {
   if (!todos.length) {
     return null
   }
@@ -17,9 +22,13 @@ const Todos = ({todos}) => {
       <input
         className='toggle-all'
         type='checkbox'
-        // onChange={this.toggleAll}
-        // checked={activeTodoCount === 0}
+        checked={allTodosCompleted}
       />
+      <label
+        htmlFor='toggle-all'
+        onClick={dispatchToggleAll}>
+        Mark all as complete
+      </label>
       <ul className='todo-list'>
         {TodoList}
         {/* { shownTodos.map( todo => (
@@ -38,7 +47,16 @@ const Todos = ({todos}) => {
   )
 }
 
+const selector = createSelector(
+  ({todos}) => todos,
+  todos => ({
+    todos,
+    allTodosCompleted: getActiveCount(todos) === todos.length
+  })
+)
+
 export default connect(
-  ({todos}) => ({todos}),
+  // ({todos}) => ({todos}),
+  selector,
   Todos
 )

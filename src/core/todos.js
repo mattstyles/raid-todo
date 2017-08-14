@@ -1,6 +1,6 @@
 
 import uuid from 'uuid/v1'
-import {remove, map} from 'lodash/fp'
+import {remove, map, reduce} from 'lodash/fp'
 
 export const createTodo = title => ({
   title: title.trim(),
@@ -13,7 +13,7 @@ export const removeTodo = selectedId => remove(({id}) => id === selectedId)
 
 export const toggleTodo = selectedId => map(todo => {
   if (todo.id !== selectedId) {
-    return
+    return todo
   }
 
   return {
@@ -21,3 +21,15 @@ export const toggleTodo = selectedId => map(todo => {
     completed: !todo.completed
   }
 })
+
+export const getActiveCount =
+  reduce((total, todo) => todo.completed ? ++total : total, 0)
+
+export const toggleAllTodos = todos => {
+  const allCompleted = getActiveCount(todos) === todos.length
+
+  return todos.map(todo => ({
+    ...todo,
+    completed: !allCompleted
+  }))
+}
