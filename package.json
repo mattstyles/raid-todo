@@ -10,11 +10,12 @@
     "build": "NODE_PATH=src NODE_ENV=production browserify --extension jsx src/main.js | uglifyjs -cm > dist/main.js && ncp src/index.html dist/index.html && ncp node_modules/todomvc-common dist/todomvc-common && ncp node_modules/todomvc-app-css dist/todomvc-app-css",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "start": "NODE_PATH=src bin/start"
+    "start": "NODE_PATH=src DEBUG=true bin/start"
   },
   "browserify": {
     "transform": [
-      "babelify"
+      "babelify",
+      "envify"
     ]
   },
   "babel": {
@@ -69,7 +70,9 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "envify": "^4.1.0",
     "lodash": "^4.17.4",
+    "pluralize": "^6.0.0",
     "raid": "^2.7.0",
     "raid-addons": "^2.8.0",
     "raid-navigator": "^2.8.0",

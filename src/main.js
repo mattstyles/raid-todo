@@ -7,7 +7,9 @@ import App from 'views/app'
 import {update as newTodoUpdate} from 'components/newTodo'
 import {debug, todos} from 'core/updates'
 
-signal.register(debug)
+if (process.env.DEBUG) {
+  signal.register(debug)
+}
 signal.register(newTodoUpdate)
 signal.register(todos)
 

@@ -1,20 +1,24 @@
 
 import {connect, dispatch} from 'signals'
 import {createSelector} from 'reselect'
+import pluralize from 'pluralize'
 
-import {hasTodos} from 'core/selectors'
+import {hasTodos, getActiveCount} from 'core/selectors'
 import appActions from 'core/actions'
 
 const dispatchClearCompleted = dispatch(appActions.clearCompleted)
 
-const TodosFooter = ({hasTodos}) => {
+const TodosFooter = ({hasTodos, activeCount}) => {
   if (!hasTodos) {
     return null
   }
 
   return (
     <footer className='footer'>
-      <span className='todo-count'><strong>0</strong> item left</span>
+      <span className='todo-count'>
+        <strong>{activeCount}</strong>
+        {` ${pluralize('item', activeCount)} left`}
+      </span>
       <ul className='filters'>
         <li>
           <a className='selected' href='#/'>All</a>
@@ -37,8 +41,10 @@ const TodosFooter = ({hasTodos}) => {
 
 const selector = createSelector(
   hasTodos,
-  hasTodos => ({
-    hasTodos
+  getActiveCount,
+  (hasTodos, activeCount) => ({
+    hasTodos,
+    activeCount
   })
 )
 

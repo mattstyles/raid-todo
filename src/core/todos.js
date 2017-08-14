@@ -22,11 +22,11 @@ export const toggleTodo = selectedId => map(todo => {
   }
 })
 
-export const getActiveCount =
+export const getCompletedCount =
   reduce((total, todo) => todo.isCompleted ? ++total : total, 0)
 
 export const toggleAllTodos = todos => {
-  const allCompleted = getActiveCount(todos) === todos.length
+  const allCompleted = getCompletedCount(todos) === todos.length
 
   return todos.map(todo => ({
     ...todo,
