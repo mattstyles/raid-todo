@@ -2,7 +2,11 @@
 import {compress} from 'raid-addons'
 
 import appActions from 'core/actions'
-import {createTodo, removeTodo as remove} from 'core/todos'
+import {
+  createTodo,
+  removeTodo as remove,
+  toggleTodo as toggle
+} from 'core/todos'
 
 export const debug = (state, event) => {
   console.log(state, '::', event)
@@ -30,7 +34,17 @@ const removeTodo = (state, {id}) => {
   }
 }
 
+const toggleTodo = (state, {id}) => {
+  const {todos} = state
+
+  return {
+    ...state,
+    todos: toggle(id)(todos)
+  }
+}
+
 export const todos = compress({
   [appActions.addTodo]: addTodo,
-  [appActions.removeTodo]: removeTodo
+  [appActions.removeTodo]: removeTodo,
+  [appActions.toggleTodo]: toggleTodo
 })

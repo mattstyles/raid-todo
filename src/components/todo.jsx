@@ -20,9 +20,9 @@ const Todo = ({id, title, completed, editing}) => {
           className='toggle'
           type='checkbox'
           checked={completed}
-          onChange={onToggle}
+          onChange={onToggle(id)}
         />
-        <label onDoubleClick={onEdit}>{title}</label>
+        <label onDoubleClick={onEdit(id)}>{title}</label>
         <button
           className='destroy'
           onClick={onRemove(id)}
