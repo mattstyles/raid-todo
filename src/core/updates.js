@@ -6,7 +6,8 @@ import {
   createTodo,
   removeTodo as remove,
   toggleTodo as toggle,
-  toggleAllTodos as toggleAll
+  toggleAllTodos as toggleAll,
+  clearCompletedTodos as clearTodos
 } from 'core/todos'
 
 export const debug = (state, event) => {
@@ -53,9 +54,19 @@ const toggleAllTodos = (state) => {
   }
 }
 
+const clearCompletedTodos = (state) => {
+  const {todos} = state
+
+  return {
+    ...state,
+    todos: clearTodos(todos)
+  }
+}
+
 export const todos = compress({
   [appActions.addTodo]: addTodo,
   [appActions.removeTodo]: removeTodo,
   [appActions.toggleTodo]: toggleTodo,
-  [appActions.toggleAll]: toggleAllTodos
+  [appActions.toggleAll]: toggleAllTodos,
+  [appActions.clearCompleted]: clearCompletedTodos
 })

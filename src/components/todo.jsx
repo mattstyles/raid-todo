@@ -12,14 +12,14 @@ const onRemove = id => event => dispatchRemove({id})
 const onEdit = id => event => dispatchEdit({id})
 const onToggle = id => event => dispatchToggle({id})
 
-const Todo = ({id, title, completed, editing}) => {
+const Todo = ({id, title, isCompleted, editing}) => {
   return (
-    <li className={cx({completed, editing})}>
+    <li className={cx({completed: isCompleted, editing})}>
       <div className='view'>
         <input
           className='toggle'
           type='checkbox'
-          checked={completed}
+          checked={isCompleted}
           onChange={onToggle(id)}
         />
         <label onDoubleClick={onEdit(id)}>{title}</label>
