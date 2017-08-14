@@ -8,6 +8,7 @@
     "clean": "rimraf dist && mkdirp dist",
     "prebuild": "npm run clean",
     "build": "NODE_PATH=src NODE_ENV=production browserify --extension jsx src/main.js | uglifyjs -cm > dist/main.js && ncp src/index.html dist/index.html && ncp node_modules/todomvc-common dist/todomvc-common && ncp node_modules/todomvc-app-css dist/todomvc-app-css",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "start": "NODE_PATH=src bin/start"
   },

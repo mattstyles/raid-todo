@@ -3,13 +3,13 @@ import {connect, dispatch} from 'signals'
 import {createSelector} from 'reselect'
 
 import Todo from './todo'
-import {getActiveCount} from 'core/todos'
+import {getTodos, hasTodos, allTodosCompleted} from 'core/selectors'
 import appActions from 'core/actions'
 
 const dispatchToggleAll = dispatch(appActions.toggleAll)
 
-const Todos = ({todos, allTodosCompleted}) => {
-  if (!todos.length) {
+const Todos = ({todos, hasTodos, allTodosCompleted}) => {
+  if (!hasTodos) {
     return null
   }
 
@@ -31,32 +31,21 @@ const Todos = ({todos, allTodosCompleted}) => {
       </label>
       <ul className='todo-list'>
         {TodoList}
-        {/* { shownTodos.map( todo => (
-        <TodoItem
-        todo={todo}
-        onToggle={this.toggle}
-        onDestroy={this.destroy}
-        onEdit={this.edit}
-        editing={editing === todo.id}
-        onSave={this.save}
-        onCancel={this.cancel}
-        />
-        )) } */}
       </ul>
     </section>
   )
 }
 
 const selector = createSelector(
-  ({todos}) => todos,
-  todos => ({
-    todos,
-    allTodosCompleted: getActiveCount(todos) === todos.length
+  getTodos,
+  hasTodos,
+  allTodosCompleted,
+  (todos, hasTodos, allTodosCompleted) => ({
+    todos, hasTodos, allTodosCompleted
   })
 )
 
 export default connect(
-  // ({todos}) => ({todos}),
   selector,
   Todos
 )

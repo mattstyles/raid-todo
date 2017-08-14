@@ -4,7 +4,8 @@ const actions = {
   removeTodo: 'app:removeTodo',
   toggleTodo: 'app:toggleTodo',
   editTodo: 'app:editTodo',
-  toggleAll: 'app:toggleAll'
+  toggleAll: 'app:toggleAll',
+  clearCompleted: 'app:clearCompleted'
 }
 
 export default actions
