@@ -18,3 +18,5 @@ export const hasTodos =
 export const getTodos = ({todos}) => todos
 export const getActiveCount = ({todos}) =>
   todos.length - getCompletedCount(todos)
+export const getNewTodo = ({newTodo}) => newTodo
+export const getEditTodo = ({editTodo}) => editTodo

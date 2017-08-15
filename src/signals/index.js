@@ -4,6 +4,7 @@ import {adaptor} from 'raid-addons'
 
 export const signal = new Signal({
   newTodo: '',
+  editTodo: '',
   todos: []
 })
 

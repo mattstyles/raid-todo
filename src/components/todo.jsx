@@ -3,6 +3,7 @@ import cx from 'classnames'
 
 import {dispatch} from 'signals'
 import appActions from 'core/actions'
+import EditTodo from './newTodo/editTodo'
 
 const dispatchRemove = dispatch(appActions.removeTodo)
 const dispatchEdit = dispatch(appActions.editTodo)
@@ -12,9 +13,12 @@ const onRemove = id => event => dispatchRemove({id})
 const onEdit = id => event => dispatchEdit({id})
 const onToggle = id => event => dispatchToggle({id})
 
-const Todo = ({id, title, isCompleted, editing}) => {
+const Todo = ({id, title, isCompleted, isEditing, editText}) => {
   return (
-    <li className={cx({completed: isCompleted, editing})}>
+    <li className={cx({
+      completed: isCompleted,
+      editing: isEditing
+    })}>
       <div className='view'>
         <input
           className='toggle'
@@ -28,15 +32,10 @@ const Todo = ({id, title, isCompleted, editing}) => {
           onClick={onRemove(id)}
         />
       </div>
-      {/* { editing && (
-      <input
-      class='edit'
-      value={editText}
-      onBlur={this.handleSubmit}
-      onInput={this.linkState('editText')}
-      onKeyDown={this.handleKeyDown}
-      />
-      ) } */}
+      {isEditing && (
+        <EditTodo id={id} />
+      )}
+
     </li>
   )
 }

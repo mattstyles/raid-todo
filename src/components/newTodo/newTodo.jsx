@@ -2,16 +2,26 @@
 import {compose} from 'lodash/fp'
 
 import {connect, dispatch} from 'signals'
-import {noop} from 'utils'
+import {noop, isEnterKey, isEscapeKey} from 'utils'
 import {getInputValue, getKey} from 'core/selectors'
 import actions from './actions'
 import appActions from 'core/actions'
 
 const dispatchChange = dispatch(actions.onChange)
 const dispatchEnterdown = dispatch(appActions.addTodo)
-const dispatchEnterKey = ({key}) => key === '<enter>'
-  ? dispatchEnterdown({key})
-  : noop
+const dispatchEscapedown = dispatch(appActions.cancelTodo)
+
+const handleEnterKey = ({key}) => {
+  if (isEnterKey(key)) {
+    return dispatchEnterdown({key})
+  }
+
+  if (isEscapeKey(key)) {
+    return dispatchEscapedown({key})
+  }
+
+  return noop
+}
 
 const onChange = compose(
   dispatchChange,
@@ -19,7 +29,7 @@ const onChange = compose(
 )
 
 const onEnterDown = compose(
-  dispatchEnterKey,
+  handleEnterKey,
   getKey
 )
 
@@ -37,6 +47,5 @@ const NewTodo = ({newTodo}) => (
 
 export default connect(
   ({newTodo}) => ({newTodo}),
-  // state => ({newTodo: state.newTodo}),
   NewTodo
 )

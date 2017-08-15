@@ -1,12 +1,12 @@
 
 import uuid from 'uuid/v1'
-import {remove, map, reduce, filter} from 'lodash/fp'
+import {remove, map, reduce, filter, find} from 'lodash/fp'
 
 export const createTodo = title => ({
   title: title.trim(),
   id: uuid(),
   isCompleted: false,
-  editing: false
+  isEditing: false
 })
 
 export const removeTodo = selectedId => remove(({id}) => id === selectedId)
@@ -35,3 +35,19 @@ export const toggleAllTodos = todos => {
 }
 
 export const clearCompletedTodos = filter(todo => !todo.isCompleted)
+
+export const editTodo = id => map(todo => ({
+  ...todo,
+  isEditing: id === todo.id
+}))
+
+export const getTodo = selectedId => find(todo => todo.id === selectedId)
+
+export const updateTodo = (id, props) => map(todo => {
+  return todo.id === id
+    ? {
+      ...todo,
+      ...props
+    }
+    : todo
+})
