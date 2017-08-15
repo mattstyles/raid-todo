@@ -8,12 +8,12 @@ import {getInputValue, getKey} from 'core/selectors'
 import actions from './actions'
 
 const dispatchChange = dispatch(actions.onEditChange)
-const dispatchEnterDown = dispatch(actions.setTodo)
-const dispatchEscapeDown = dispatch(actions.cancelTodo)
+const dispatchSubmit = dispatch(actions.setTodo)
+const dispatchCancel = dispatch(actions.cancelTodo)
 
 const handleEnterKey = id => match([
-  [({key}) => isEnterKey(key), ({key}) => dispatchEnterDown({key, id})],
-  [({key}) => isEscapeKey(key), ({key}) => dispatchEscapeDown({key, id})],
+  [({key}) => isEnterKey(key), ({key}) => dispatchSubmit({id})],
+  [({key}) => isEscapeKey(key), ({key}) => dispatchCancel({id})],
   [noop]
 ])
 
@@ -34,6 +34,7 @@ const EditTodo = ({id, editTodo}) => (
     value={editTodo}
     onKeyDown={onKeyDown(id)}
     onChange={onChange}
+    onBlur={() => dispatchSubmit({id})}
     autoFocus
   />
 )
