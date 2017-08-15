@@ -1,5 +1,5 @@
 
-import {compress} from 'raid-addons'
+import {compress, safe} from 'raid-addons'
 
 import appActions from 'core/actions'
 import {
@@ -11,6 +11,11 @@ import {
   editTodo as edit,
   getTodo
 } from 'core/todos'
+import {localSave} from 'utils'
+
+export const saveState = key => safe(state => {
+  localSave(key, state)
+})
 
 export const debug = (state, event) => {
   console.log(state, '::', event)

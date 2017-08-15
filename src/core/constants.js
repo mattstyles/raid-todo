@@ -4,3 +4,5 @@ export const todoFilterTypes = {
   completed: 'todos:completed',
   all: 'todos:all'
 }
+
+export const saveKey = 'raid:todomvc'
