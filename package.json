@@ -14,8 +14,7 @@
   },
   "browserify": {
     "transform": [
-      "babelify",
-      "envify"
+      "babelify"
     ]
   },
   "babel": {
@@ -70,7 +69,7 @@
     "styled-jsx": "^1.0.10"
   },
   "dependencies": {
-    "@mattstyles/match": "^1.0.0",
+    "@mattstyles/match": "^1.0.1",
     "classnames": "^2.2.5",
     "director": "^1.2.8",
     "lodash": "^4.17.4",
