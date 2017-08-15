@@ -13,14 +13,15 @@ import {
 } from 'core/selectors'
 import appActions from 'core/actions'
 import {todoFilterTypes} from 'core/constants'
+import {isStringEqual} from 'utils'
 
 const dispatchToggleAll = dispatch(appActions.toggleAll)
 
 const filterMatcher = filter => match([
-  [() => filter === todoFilterTypes.completed,
+  [isStringEqual(filter, todoFilterTypes.completed),
     todo => todo.isCompleted
   ],
-  [() => filter === todoFilterTypes.active,
+  [isStringEqual(filter, todoFilterTypes.active),
     todo => !todo.isCompleted
   ],
   [() => true]

@@ -11,16 +11,13 @@ export const createTodo = title => ({
 
 export const removeTodo = selectedId => remove(({id}) => id === selectedId)
 
-export const toggleTodo = selectedId => map(todo => {
-  if (todo.id !== selectedId) {
-    return todo
-  }
-
-  return {
+export const toggleTodo = selectedId => map(todo => todo.id !== selectedId
+  ? todo
+  : {
     ...todo,
     isCompleted: !todo.isCompleted
   }
-})
+)
 
 export const getCompletedCount =
   reduce((total, todo) => todo.isCompleted ? ++total : total, 0)
@@ -43,11 +40,10 @@ export const editTodo = id => map(todo => ({
 
 export const getTodo = selectedId => find(todo => todo.id === selectedId)
 
-export const updateTodo = (id, props) => map(todo => {
-  return todo.id === id
-    ? {
-      ...todo,
-      ...props
-    }
-    : todo
-})
+export const updateTodo = (id, props) => map(todo => todo.id !== id
+  ? todo
+  : {
+    ...todo,
+    ...props
+  }
+)
