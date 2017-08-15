@@ -76,6 +76,11 @@ const editTodo = (state, {id}) => ({
   editTodo: getTodo(id)(state.todos).title
 })
 
+const setFilter = (state, {filter}) => ({
+  ...state,
+  nowShowing: filter
+})
+
 export const todos = compress({
   [appActions.addTodo]: addTodo,
   [appActions.cancelTodo]: cancelTodo,
@@ -83,5 +88,6 @@ export const todos = compress({
   [appActions.toggleTodo]: toggleTodo,
   [appActions.toggleAll]: toggleAllTodos,
   [appActions.clearCompleted]: clearCompletedTodos,
-  [appActions.editTodo]: editTodo
+  [appActions.editTodo]: editTodo,
+  [appActions.setFilter]: setFilter
 })

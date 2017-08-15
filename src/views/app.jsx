@@ -3,7 +3,7 @@ import Header from 'components/header'
 import Todos from 'components/todos'
 import Footer from 'components/todosFooter'
 
-const App = ({state}) => (
+const App = () => (
   <div>
     <Header />
     <Todos />

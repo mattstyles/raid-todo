@@ -6,7 +6,8 @@ const actions = {
   toggleTodo: 'app:toggleTodo',
   editTodo: 'app:editTodo',
   toggleAll: 'app:toggleAll',
-  clearCompleted: 'app:clearCompleted'
+  clearCompleted: 'app:clearCompleted',
+  setFilter: 'app:setFilter'
 }
 
 export default actions

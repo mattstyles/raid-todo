@@ -2,10 +2,13 @@
 import {Signal} from 'raid'
 import {adaptor} from 'raid-addons'
 
+import {todoFilterTypes} from 'core/constants'
+
 export const signal = new Signal({
   newTodo: '',
   editTodo: '',
-  todos: []
+  todos: [],
+  nowShowing: todoFilterTypes.all
 })
 
 export const connect = adaptor(signal)

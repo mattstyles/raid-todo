@@ -2,6 +2,7 @@
 import {render} from 'react-dom'
 
 import {signal} from 'signals'
+import start from 'core/router'
 import App from 'views/app'
 
 import {update as newTodoUpdate} from 'components/newTodo'
@@ -19,3 +20,5 @@ signal.observe(state => {
     document.querySelector('.js-todo')
   )
 }, err => console.error(err))
+
+start()

@@ -1,21 +1,41 @@
 
+import match from '@mattstyles/match'
 import {connect, dispatch} from 'signals'
 import {createSelector} from 'reselect'
 
 import Todo from './todo'
-import {getTodos, hasTodos, allTodosCompleted, getEditTodo} from 'core/selectors'
+import {
+  getTodos,
+  hasTodos,
+  allTodosCompleted,
+  getEditTodo,
+  getShowingFilter
+} from 'core/selectors'
 import appActions from 'core/actions'
+import {todoFilterTypes} from 'core/constants'
 
 const dispatchToggleAll = dispatch(appActions.toggleAll)
 
-const Todos = ({todos, hasTodos, allTodosCompleted, editTodo}) => {
+const filterMatcher = filter => match([
+  [() => filter === todoFilterTypes.completed,
+    todo => todo.isCompleted
+  ],
+  [() => filter === todoFilterTypes.active,
+    todo => !todo.isCompleted
+  ],
+  [() => true]
+])
+
+const Todos = ({todos, hasTodos, allTodosCompleted, editTodo, nowShowing}) => {
   if (!hasTodos) {
     return null
   }
 
-  const TodoList = todos.map(todo => (
-    <Todo key={todo.id} {...todo} editText={editTodo} />
-  ))
+  const TodoList = todos
+    .filter(filterMatcher(nowShowing))
+    .map(todo => (
+      <Todo key={todo.id} {...todo} editText={editTodo} />
+    ))
 
   return (
     <section className='main'>
@@ -41,8 +61,9 @@ const selector = createSelector(
   hasTodos,
   allTodosCompleted,
   getEditTodo,
-  (todos, hasTodos, allTodosCompleted, editTodo) => ({
-    todos, hasTodos, allTodosCompleted, editTodo
+  getShowingFilter,
+  (todos, hasTodos, allTodosCompleted, editTodo, nowShowing) => ({
+    todos, hasTodos, allTodosCompleted, editTodo, nowShowing
   })
 )
 

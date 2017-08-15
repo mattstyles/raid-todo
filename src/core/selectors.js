@@ -20,3 +20,4 @@ export const getActiveCount = ({todos}) =>
   todos.length - getCompletedCount(todos)
 export const getNewTodo = ({newTodo}) => newTodo
 export const getEditTodo = ({editTodo}) => editTodo
+export const getShowingFilter = ({nowShowing}) => nowShowing
