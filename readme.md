@@ -8,7 +8,7 @@
 
 > Raid is a data management layer that sits behind presentational libraries such as React. Raid embraces a centralised object store and top-down data flow to help make your application more predicable and consistent.
 
-> [Raid - mattstyles.github.io/raid]([Raid-todo](http://mattstyles.github.io/raid))
+> _[Raid - mattstyles.github.io/raid](http://mattstyles.github.io/raid)_
 
 ## Getting Started
 
@@ -21,7 +21,7 @@ npm start -- -o
 
 ## Contributing
 
-Pull requests are always welcome, the project uses the [standard](http://standardjs.com) code style. Please run `npm test` to ensure all tests are passing and add tests for any new features or updates.
+Pull requests are always welcome, the project uses the [standard](http://standardjs.com) code style.
 
 For bugs and feature requests, [please create an issue](https://github.com/mattstyles/raid-todo/issues).
 
