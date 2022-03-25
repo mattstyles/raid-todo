@@ -60,7 +60,7 @@
     "budo": "^9.4.7",
     "envify": "^4.1.0",
     "gh-pages": "^1.0.0",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.6",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
     "prop-types": "^15.5.10",
